@@ -8,6 +8,8 @@ offering instant loading, offline support, push notifications, and cross-platfor
 
 The Meet App uses Google's Calander API and AWS Lambda to provide users with a platform to show upcoming and current events in thier selected city. Using Google Calandar, users have access to Google's database of current events and information on those events. AWS Lambda is foundation of the serverless system, allowing effecient and scalable functions. Together providing a serverless application showing events and details.
 
+<img src="https://github.com/Gregpk55/meet/assets/122652405/884981de-16e7-4773-be9a-6aa32bdcce57" alt="Untitled drawing" width="650">
+
 <h2>Key Features</h2>
 
 - Filter events by city.
@@ -35,3 +37,4 @@ To run the Meet App locally, follow these steps:
 3. Configure the Google Calendar API credentials.
 4. Start the development server:
 5. Open the app in your browser:
+
