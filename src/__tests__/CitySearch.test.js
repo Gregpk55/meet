@@ -58,4 +58,21 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
     expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
   });
+
+  test('renders input field with initial state', () => {
+    expect(CitySearchWrapper.find('.city').prop('value')).toBe('Berlin, Germany');
+  });
+
+  test('renders suggestions based on user input', () => {
+    CitySearchWrapper.find('.city').simulate('change', {
+      target: { value: 'Berlin' },
+    });
+    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(2); // Assuming there are 2 matching suggestions
+  });
+
+  test('updates query state on user input', () => {
+    const eventObject = { target: { value: 'Berlin' } };
+    CitySearchWrapper.find('.city').simulate('change', eventObject);
+    expect(CitySearchWrapper.state('query')).toBe('Berlin');
+  });
 });
