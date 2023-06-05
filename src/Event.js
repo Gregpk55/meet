@@ -34,7 +34,6 @@ class Event extends Component {
             <p>{event.description}</p>
           </div>
         )}
-        {numberOfEvents && <p className="number-of-events">{`${numberOfEvents} Events`}</p>}
       </div>
     );
   }
