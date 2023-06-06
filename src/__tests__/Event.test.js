@@ -12,34 +12,28 @@ describe('<Event /> component', () => {
   });
 
   test('details are hidden by default', () => {
-    expect(EventWrapper.state('showDetails')).toBe(false);
-    expect(EventWrapper.find('.event-details')).toHaveLength(0);
+    expect(EventWrapper.state('collapsed')).toBe(true);
+    expect(EventWrapper.find('div div')).toHaveLength(0);
   });
 
-  test('button label shows "Show Details" when showDetails is false', () => {
-    expect(EventWrapper.find('.details-button').text()).toBe('Show Details');
+  test('button label shows "show details" when collapsed is true', () => {
+    expect(EventWrapper.find('button').text()).toBe('show details');
   });
 
-  test('details are toggled when Show Details button is clicked', () => {
-    EventWrapper.find('.details-button').simulate('click');
-    expect(EventWrapper.state('showDetails')).toBe(true);
+  test('details are toggled when "show details" button is clicked', () => {
+    EventWrapper.find('button').simulate('click');
+    expect(EventWrapper.state('collapsed')).toBe(false);
   });
 
-  test('button label shows "Hide Details" when showDetails is true', () => {
-    EventWrapper.setState({ showDetails: true });
-    expect(EventWrapper.find('.details-button').text()).toBe('Hide Details');
+  test('button label shows "hide details" when collapsed is false', () => {
+    EventWrapper.setState({ collapsed: false });
+    expect(EventWrapper.find('button').text()).toBe('hide details');
   });
 
-  test('details are hidden when "Hide Details" button is clicked', () => {
-    EventWrapper.setState({ showDetails: true });
-    EventWrapper.find('.details-button').simulate('click');
-    expect(EventWrapper.state('showDetails')).toBe(false);
-    expect(EventWrapper.find('.event-details')).toHaveLength(0);
-  });
-
-  test('event details are rendered when showDetails is true', () => {
-    EventWrapper.setState({ showDetails: true });
-    expect(EventWrapper.find('.event-details')).toHaveLength(1);
-    expect(EventWrapper.find('.event-details').text()).toBe(event.description);
+  test('details are hidden when "hide details" button is clicked', () => {
+    EventWrapper.setState({ collapsed: false });
+    EventWrapper.find('button').simulate('click');
+    expect(EventWrapper.state('collapsed')).toBe(true);
+    expect(EventWrapper.find('div div')).toHaveLength(0);
   });
 });

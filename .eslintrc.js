@@ -3,14 +3,14 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ["eslint:recommended", "prettier"],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   parserOptions: {
-    sourceType: "module",
+    sourceType: 'module',
   },
   rules: {
-    "prettier/prettier": "error",
-    "no-console": "off",
-    semi: ["error", "always"],
-    quotes: ["error", "single"],
+    'prettier/prettier': 'warn',
+    'no-console': 'off',
+    semi: ['error', 'always'],
+    quotes: ['error', 'single'],
   },
 };

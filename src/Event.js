@@ -4,36 +4,39 @@ class Event extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDetails: false,
+      collapsed: true,
     };
   }
 
   handleDetailsToggle = () => {
     this.setState((prevState) => ({
-      showDetails: !prevState.showDetails,
+      collapsed: !prevState.collapsed,
     }));
   };
 
   render() {
-    const { event, numberOfEvents } = this.props;
-    const { showDetails } = this.state;
+    const { event } = this.props;
+    const { collapsed } = this.state;
+
+    if (!event) {
+      return null;
+    }
 
     return (
       <div>
-        <h2>{event.title}</h2>
-        <p>{event.date}</p>
-        <p>{event.location}</p>
-        <button
-          className="details-button"
-          onClick={this.handleDetailsToggle}
-        >
-          {showDetails ? 'Hide Details' : 'Show Details'}
-        </button>
-        {showDetails && (
-          <div className="event-details">
+        <h2>{event.summary}</h2>
+        <p>{new Date(event.start.dateTime).toString()}</p>
+        <p>{`@${event.summary} | ${event.location}`}</p>
+        {!collapsed && (
+          <div>
+            <h3>About event:</h3>
+            <a href={event.htmlLink}>See details on Google Calendar</a>
             <p>{event.description}</p>
           </div>
         )}
+        <button onClick={this.handleDetailsToggle}>
+          {collapsed ? 'show' : 'hide'} details
+        </button>
       </div>
     );
   }
