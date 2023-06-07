@@ -9,6 +9,28 @@ class CitySearch extends Component {
     showSuggestions: undefined,
   };
 
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  handleClickOutside = (event) => {
+    if (
+      this.searchInputRef &&
+      !this.searchInputRef.contains(event.target) &&
+      this.state.showSuggestions
+    ) {
+      this.setState({
+        query: '',
+        suggestions: [],
+        showSuggestions: false,
+      });
+    }
+  };
+
   handleInputChanged = (event) => {
     const value = event.target.value;
     const suggestions = this.props.locations.filter((location) => {
@@ -17,6 +39,7 @@ class CitySearch extends Component {
     this.setState({
       query: value,
       suggestions,
+      showSuggestions: true,
     });
   };
 
@@ -31,7 +54,7 @@ class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
+      <div className="CitySearch" ref={(ref) => (this.searchInputRef = ref)}>
         <input
           type="text"
           className="city"

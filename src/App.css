@@ -76,11 +76,17 @@ input[type='number'] {
   background-color: #bcdcdb;
 }
 
+.NumberOfEvents {
+  margin-left: 10px;
+  padding: 10px;
+  align-self: left;
+}
+
 .event {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
   text-align: left;
-  border: 1px solid #ccc;
+  border: 2px solid black;
   border-radius: 4px;
   position: relative;
 }

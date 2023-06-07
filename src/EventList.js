@@ -1,5 +1,4 @@
 // src/EventList.js
-
 import React, { Component } from 'react';
 import Event from './Event'; // in src/EventList.js
 

@@ -1,7 +1,7 @@
 // src/__tests__/CitySearch.test.js
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import CitySearch from '../CitySearch';
 import { mockData } from '../mock-data';
 import { extractLocations } from '../api';
@@ -102,5 +102,24 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({
       display: 'none',
     });
+  });
+
+  test('resets state to default when clicking outside the search bar or search results', () => {
+    const CitySearchWrapper = mount(<CitySearch />);
+
+    CitySearchWrapper.setState({
+      query: 'London',
+      suggestions: ['London', 'New York'],
+      showSuggestions: true,
+    });
+
+    const event = new MouseEvent('click');
+    document.dispatchEvent(event);
+
+    expect(CitySearchWrapper.state('query')).toBe('');
+    expect(CitySearchWrapper.state('suggestions')).toEqual([]);
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
+
+    CitySearchWrapper.unmount();
   });
 });
