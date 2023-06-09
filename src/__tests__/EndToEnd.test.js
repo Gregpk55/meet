@@ -32,3 +32,47 @@ describe('show/hide an event details', () => {
     expect(eventDetails).toBeNull();
   });
 });
+
+describe('Filter events by city', () => {
+  let browser;
+  let page;
+
+  beforeAll(async () => {
+    jest.setTimeout(60000);
+    let browser = await puppeteer.launch({
+      headless: true,
+      slowMo: 250, // slow down by 250ms
+      ignoreDefaultArgs: ['--disable-extensions'], // ignores default setting that causes timeout errors
+    });
+    page = await browser.newPage();
+    await page.goto('http://localhost:3000/');
+    await page.waitForSelector('.EventList');
+  });
+
+  afterAll(async () => {
+    await browser.close();
+  });
+
+  test('Displays all upcoming events when no city is selected', async () => {
+    const eventList = await page.$('.EventList');
+    expect(eventList).toBeDefined();
+    const eventItems = await page.$$('.EventList li');
+    expect(eventItems.length).toBeGreaterThan(0);
+  });
+
+  test('Displays suggested cities when typing in the city search input', async () => {
+    await page.type('.CitySearch input', 'Berlin');
+    await page.waitForSelector('.suggestions li');
+    const suggestions = await page.$$('.suggestions li');
+    expect(suggestions.length).toBeGreaterThan(0);
+  });
+
+  test('Updates events when a city is selected from the suggestions', async () => {
+    await page.click('.suggestions li');
+    await page.waitForSelector('.EventList');
+    const eventList = await page.$('.EventList');
+    expect(eventList).toBeDefined();
+    const eventItems = await page.$$('.EventList li');
+    expect(eventItems.length).toBeGreaterThan(0);
+  });
+});
