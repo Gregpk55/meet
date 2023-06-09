@@ -9,7 +9,7 @@ describe('<NumberOfEvents /> component', () => {
 
   beforeAll(() => {
     NumberOfEventsWrapper = shallow(
-      <NumberOfEvents updateEventsFunc={mockUpdateEventsFunc} />
+      <NumberOfEvents updateEvents={mockUpdateEventsFunc} />
     );
   });
 
@@ -46,7 +46,9 @@ describe('<NumberOfEvents /> integration', () => {
   test('changes the number of events', () => {
     const eventCount = 32;
     AppWrapper.find(NumberOfEvents).props().updateEventsFunc(null, eventCount);
-    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(32);
+    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(
+      eventCount
+    );
   });
 
   afterAll(() => {
