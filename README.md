@@ -30,6 +30,8 @@ The Meet App uses Google's Calander API and AWS Lambda to provide users with a p
 
 <h2>Getting Started</h2>
 
+view live app: https://Gregpk55.github.io/meet
+
 To run the Meet App locally, follow these steps:
 
 1. Clone this repository:
