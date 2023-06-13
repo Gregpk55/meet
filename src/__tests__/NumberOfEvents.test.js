@@ -45,7 +45,7 @@ describe('<NumberOfEvents /> integration', () => {
 
   test('changes the number of events', () => {
     const eventCount = 32;
-    AppWrapper.find(NumberOfEvents).props().updateEventsFunc(null, eventCount);
+    AppWrapper.find(NumberOfEvents).props().updateEvents(null, eventCount);
     expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(
       eventCount
     );
