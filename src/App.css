@@ -4,6 +4,11 @@
   padding: 2% 5%;
 }
 
+.html,
+body {
+  background-color: lightgray;
+}
+
 .App * {
   box-sizing: border-box;
 }
@@ -109,6 +114,7 @@ input[type='number'] {
   border: 2px solid black;
   border-radius: 4px;
   position: relative;
+  background-color: white;
 }
 
 .details-btn {
