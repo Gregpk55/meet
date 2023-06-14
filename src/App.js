@@ -6,12 +6,14 @@ import Event from './Event';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
+import { WarningAlert } from './Alert';
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
+    isOffline: false,
   };
 
   componentDidMount() {
@@ -21,11 +23,25 @@ class App extends Component {
         this.setState({ events, locations: extractLocations(events) });
       }
     });
+
+    window.addEventListener('offline', this.handleOffline);
+    window.addEventListener('online', this.handleOnline);
   }
 
   componentWillUnmount() {
     this.mounted = false;
+
+    window.removeEventListener('offline', this.handleOffline);
+    window.removeEventListener('online', this.handleOnline);
   }
+
+  handleOffline = () => {
+    this.setState({ isOffline: true });
+  };
+
+  handleOnline = () => {
+    this.setState({ isOffline: false });
+  };
 
   updateEvents = (location, eventCount) => {
     getEvents().then((events) => {
@@ -35,7 +51,6 @@ class App extends Component {
       }
       if (eventCount) {
         filteredEvents = filteredEvents.slice(0, eventCount);
-
         this.setState({ numberOfEvents: eventCount });
       }
       this.setState({
@@ -45,8 +60,11 @@ class App extends Component {
   };
 
   render() {
+    const { isOffline } = this.state;
+
     return (
       <div className="App">
+        {isOffline && <WarningAlert text="You are currently offline" />}
         <div>
           <h1>Meet App</h1>
           <CitySearch
