@@ -4,7 +4,8 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import Event from './Event';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from './api';
+import WelcomeScreen from './WelcomeScreen';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import { WarningAlert } from './Alert';
 
@@ -14,33 +15,41 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     isOffline: false,
+    showWelcomeScreen: undefined,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
-      }
-    });
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = await searchParams.get('code');
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events,
+            locations: extractLocations(events),
+          });
+        }
+      });
+    }
 
-    window.addEventListener('offline', this.handleOffline);
-    window.addEventListener('online', this.handleOnline);
+    window.addEventListener('offline', this.handleConnectionChange);
+    window.addEventListener('online', this.handleConnectionChange);
   }
 
   componentWillUnmount() {
     this.mounted = false;
 
-    window.removeEventListener('offline', this.handleOffline);
-    window.removeEventListener('online', this.handleOnline);
+    window.removeEventListener('offline', this.handleConnectionChange);
+    window.removeEventListener('online', this.handleConnectionChange);
   }
 
-  handleOffline = () => {
-    this.setState({ isOffline: true });
-  };
-
-  handleOnline = () => {
-    this.setState({ isOffline: false });
+  handleConnectionChange = () => {
+    const isOffline = !navigator.onLine;
+    this.setState({ isOffline });
   };
 
   updateEvents = (location, eventCount) => {
@@ -60,7 +69,22 @@ class App extends Component {
   };
 
   render() {
-    const { isOffline } = this.state;
+    if (this.state.showWelcomeScreen === undefined) {
+      return <div className="App" />;
+    }
+
+    const { isOffline, showWelcomeScreen } = this.state;
+
+    if (showWelcomeScreen) {
+      return (
+        <div className="App">
+          <WelcomeScreen
+            showWelcomeScreen={showWelcomeScreen}
+            getAccessToken={getAccessToken}
+          />
+        </div>
+      );
+    }
 
     return (
       <div className="App">
@@ -76,7 +100,6 @@ class App extends Component {
           numberOfEvents={this.state.numberOfEvents}
           updateEvents={this.updateEvents}
         />
-
         <EventList events={this.state.events} />
         <Event />
       </div>
