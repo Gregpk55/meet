@@ -50,7 +50,7 @@ export const getEvents = async () => {
   if (token) {
     removeQuery();
     const url =
-      ' https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
+      'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
       '/' +
       token;
     const result = await axios.get(url);
