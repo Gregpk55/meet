@@ -258,3 +258,13 @@ input[type='number'] {
   background-color: #4285f4;
   border-radius: 10px;
 }
+
+
+.recharts-responsive-container {
+  padding: 10px 10px 35px;
+  margin-bottom: 10px;
+  text-align: left;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+}

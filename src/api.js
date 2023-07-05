@@ -17,7 +17,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get('code');
     if (!code) {
       const results = await axios.get(
-        'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
+        'Lambda url'
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
@@ -27,7 +27,7 @@ export const getAccessToken = async () => {
   return accessToken;
 };
 
-export const checkToken = async (accessToken) => {
+ export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -50,7 +50,7 @@ export const getEvents = async () => {
   if (token) {
     removeQuery();
     const url =
-      'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
+      ' Lambda events' +
       '/' +
       token;
     const result = await axios.get(url);
@@ -78,10 +78,10 @@ const removeQuery = () => {
   }
 };
 
-const getToken = async (code) => {
+  const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
+    'Lamda' +
       '/' +
       encodeCode
   )
