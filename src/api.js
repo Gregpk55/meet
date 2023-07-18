@@ -17,7 +17,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get('code');
     if (!code) {
       const results = await axios.get(
-        'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
+        'https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
@@ -50,7 +50,7 @@ export const getEvents = async () => {
   if (token) {
     removeQuery();
     const url =
-      ' https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
+      ' https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
       '/' +
       token;
     const result = await axios.get(url);
@@ -81,7 +81,7 @@ const removeQuery = () => {
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
+    'https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
       '/' +
       encodeCode
   )
