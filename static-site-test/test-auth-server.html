@@ -62,7 +62,7 @@
       const resultLink = document.getElementById('authURL');
       // Replace this with your own endpoint
       const getAuthURL =
-        'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url';
+        'https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url';
 
       getCodeElement.onclick = function () {
         fetch(getAuthURL)
@@ -81,7 +81,7 @@
       const codeValue = document.getElementById('code');
       const getAccessToken = document.getElementById('getToken');
       const accessTokenElement = document.getElementById('accessToken');
-      const getToken = ' https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/token';
+      const getToken = 'https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/token';
 
       getAccessToken.onclick = function () {
         let code = codeValue.value;
@@ -104,7 +104,7 @@
       const getEvents = document.getElementById('getEvents');
       const events = document.getElementById('events');
       const getCalendarEvents =
-        'https://g12701hnn5.execute-api.eu-central-1.amazonaws.com/dev/api/get-events';
+        'https://kt7wcn877g.execute-api.eu-central-1.amazonaws.com/dev/api/get-events';
 
       getEvents.onclick = function () {
         const { access_token } = JSON.parse(accessTokenElement.innerText);
