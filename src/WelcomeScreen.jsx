@@ -8,7 +8,7 @@ function WelcomeScreen(props) {
       <h4>
         Log in to see upcoming events around the world for full-stack developers
       </h4>
-      <div className="button_cont" style={{ display: "flex", justifyContent: "center" }}>
+      <div className="button_cont" style={{ display: 'flex', justifyContent: 'center' }}>
         <div className="google-btn">
           <div className="google-icon-wrapper">
             <img
