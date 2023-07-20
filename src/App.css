@@ -200,12 +200,16 @@ input[type='number'] {
 }
 
 .google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 184px;
   height: 42px;
   margin: 1rem;
   background-color: #4285f4;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  position: relative;
 }
 .google-btn:hover {
   box-shadow: 0 0 6px #4285f4;
@@ -215,27 +219,21 @@ input[type='number'] {
 }
 .google-icon-wrapper {
   position: absolute;
-  margin-top: 1px;
-  margin-left: 1px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
+  left: -10px;
   background-color: #fff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: -8px;
-  width: 18px;
-  height: 18px;
+  width: 35px;
+  height: 40px;
 }
 .btn-text {
-  float: right;
-  margin: 11px 11px 0 0;
   color: #fff;
   font-size: 14px;
   letter-spacing: 0.2px;
   font-family: 'Roboto';
+  margin-left: 30px;
 }
 
 @media only screen and (min-width: 992px) {
@@ -248,4 +246,25 @@ input[type='number'] {
     min-width: auto;
     margin: 0 auto;
   }
+}
+
+.btn-textG {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  width: 184px;
+  height: 42px;
+  margin-left: 20px;
+  background-color: #4285f4;
+  border-radius: 10px;
+}
+
+
+.recharts-responsive-container {
+  padding: 10px 10px 35px;
+  margin-bottom: 10px;
+  text-align: left;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
 }

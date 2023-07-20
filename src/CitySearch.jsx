@@ -1,4 +1,3 @@
-// src/CitySearch.js
 
 import React, { Component } from 'react';
 import { InfoAlert } from './Alert';
@@ -26,9 +25,8 @@ class CitySearch extends Component {
       this.state.showSuggestions
     ) {
       this.setState({
-        query: '',
-        suggestions: [],
         showSuggestions: false,
+        infoText: '',
       });
     }
   };
@@ -39,6 +37,7 @@ class CitySearch extends Component {
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
+    suggestions.sort((a, b) => a.localeCompare(b));
     if (suggestions.length === 0) {
       this.setState({
         query: value,
